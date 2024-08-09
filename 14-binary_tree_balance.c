@@ -1,50 +1,33 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_balance - measures the balance factor of binary tree
- * balance factor is difference in height of two children's subtrees
- * @tree: pointer to the root node of the tree
+ * binary_tree_balance - factor de balance
+ * @tree: arbol
  *
- * Return: balance factor, or 0 if NULL
+ * Return: Factor de balance, la resta de la altira izquierda con la derecha
  */
 
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-		return (0);
+    if (tree != NULL)
+        return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
 
-	return (height_helper(tree->left) - height_helper(tree->right));
+    return (0);
 }
 
 /**
- * max - returns the maximum of two numbers
- * @a: first number
- * @b: second number
- *
- * Return: the maximum of a and b
+ * binary_tree_height - measures the height of a tree
+ * @tree: pointer to the root node
+ * Return: if tree null 0, else the height
  */
 
-size_t max(size_t a, size_t b)
+size_t binary_tree_height(const binary_tree_t *tree)
 {
-	return (a > b ? a : b);
-}
+    if (tree == NULL)
+        return (0);
 
-/**
- * height_helper - the heavy lifter
- * @tree: tree to measure
- *
- * Return: height, root inclusive
- */
+    size_t left_height = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+    size_t right_height = tree->right ? 1 + binary_tree_height(tree->right) : 0;
 
-size_t height_helper(const binary_tree_t *tree)
-{
-	size_t left, right;
-
-	if (tree == NULL)
-		return (0);
-
-	left = height_helper(tree->left);
-	right = height_helper(tree->right);
-
-	return (1 + max(left, right));
+    return (left_height > right_height ? left_height : right_height);
 }
