@@ -26,20 +26,8 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	return (max_height(tree->left, tree->right));
-}
-
-/**
- * max_height - returns the maximum height of two subtrees
- * @left: pointer to the left subtree
- * @right: pointer to the right subtree
- * Return: maximum height of the two subtrees
- */
-
-size_t max_height(const binary_tree_t *left, const binary_tree_t *right)
-{
-	size_t left_height = left ? 1 + binary_tree_height(left) : 0;
-	size_t right_height = right ? 1 + binary_tree_height(right) : 0;
+	size_t left_height = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+	size_t right_height = tree->right ? 1 + binary_tree_height(tree->right) : 0;
 
 	return (left_height > right_height ? left_height : right_height);
 }
